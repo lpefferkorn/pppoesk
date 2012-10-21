@@ -1,6 +1,7 @@
 Page du projet: https://github.com/lpefferkorn/pppoesk
 
 Qu'est-ce que c'est ? 
+=====================
 
 PPPoE session killer
 
@@ -68,9 +69,12 @@ pppoesk fait cela automatiquement :
     * envoi le paquet 
 
 Résultat 
+========
 
 La session PPPoE est close côté concentrateur d'accès, et il est possible d'en rétablir une immédiatement.
-Notes 
+
+Notes
+===== 
 
 Bien qu'il soit possible de faire la même chose de manière relativement aisée avec un script shell, j'ai écrit ce programme pour simplifier drastiquement cette procédure.
 

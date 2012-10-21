@@ -1,6 +1,7 @@
 Homepage: https://github.com/lpefferkorn/pppoesk
 
-What is it ? 
+What is it ?
+============ 
 
 PPPoE session killer
 
@@ -40,7 +41,9 @@ Packets's story
 This amount of time is maybe ISP specific, and is, where I live (France) at most 24h
 
 With my ISP I have to wait one or two hours.
-How pppoesk works 
+
+How pppoesk works
+================= 
 
 A PPPoE PADT (Terminate) packet is forged with session's parameters :
 
@@ -68,9 +71,12 @@ pppoesk does this in an automatic way :
     * send the packet 
 
 Results 
+=======
 
 PPPoE session is closed in seconds on the access concentrator side, and it's possible to re-establish a new one immediately.
-Notes 
+
+Notes
+===== 
 
 Of course it's possible to achieve same result with a shell script, but it's a bit less easy
 
