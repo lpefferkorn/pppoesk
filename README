@@ -6,25 +6,38 @@ What is it ?
 PPPoE session killer
 
 pppoesk is a small C program which goal is to terminate a bogus PPPoE session in an automatic way.
-PPPoE 
+
+Installation
+============
+
+pppoesk uses libnet and libpcap libraries, and builds help to the autotools. 
+
+     sh autogen.sh
+     ./configure
+     make && make install
+
+PPPoE
+===== 
 
 PPPoE is a protocol which establish a link between the ISP's access concentrator and your network device. It encapsulate successively PPP and IP protocols.
 
 A PPPoE session is established this way :rfc2516
 
-    * your network device send a PADI packet (PPPoE Active Discovery Initiation)
-    * answer from one or several access concentrator with a PADO packet (PPPoE Active Discovery Offer)
-    * selection of the concentrator with a PADR packet (PPPoE Active Discovery Request)
-    * acknowledgement by the choosen concentrator with a PADS packet(PPPoE Active Discovery Session-confirmation) then a session's specific ID is created. 
+   * your network device send a PADI packet (PPPoE Active Discovery Initiation)
+   * answer from one or several access concentrator with a PADO packet (PPPoE Active Discovery Offer)
+   * selection of the concentrator with a PADR packet (PPPoE Active Discovery Request)
+   * acknowledgement by the choosen concentrator with a PADS packet(PPPoE Active Discovery Session-confirmation) then a session's specific ID is created. 
 
 Now the connection is established and is uniquely identified by the 3 following parameters :
 
-    * MAC address of the access concentrator
-    * MAC addressof your network device
-    * session ID 
+   * MAC address of the access concentrator
+   * MAC addressof your network device
+   * session ID 
 
 Terminate the session is possible at PPP layer or at PPPoE layer with a PADT packet, which must be send to the access concentrator.
+
 Bogus session (or ghost session) 
+================================
 
 The PPPoE session can be abruptly aborded (poor phone line quality,...), without the access concentrator being informated because no PADT packet was sent.
 
@@ -32,11 +45,11 @@ Thus, from the access concentrator's side, the session is still valid and you mu
 
 Packets's story
 
-    * client : sending PADI packet
-    * access concentrator(s) : answer with a PADO packet
-    * client : a access concentrator is choosen help to a PADR packet
-    * access concentrator : hum, a session is already established, I can't open more than 1 session
-    * client : ... 
+   * client : sending PADI packet
+   * access concentrator(s) : answer with a PADO packet
+   * client : a access concentrator is choosen help to a PADR packet
+   * access concentrator : hum, a session is already established, I can't open more than 1 session
+   * client : ... 
 
 This amount of time is maybe ISP specific, and is, where I live (France) at most 24h
 
@@ -47,28 +60,28 @@ How pppoesk works
 
 A PPPoE PADT (Terminate) packet is forged with session's parameters :
 
-    * MAC address client side
-    * MAC address ISP side
-    * session ID 
+   * MAC address client side
+   * MAC address ISP side
+   * session ID 
 
 then send the packet to close the session on the ISP's concentrator access
 
 It's also possible to use the pppoe command with -p -e parameters like described in the manual page :
 
--k     Causes  pppoe to terminate an existing session by sending a PADT
-       frame, and then exit.  You must use the -e option in conjunction
-       with  this  option  to specify the session to kill.  This may be
-       useful for killing sessions when a buggy peer does  not  realize
-       the session has ended
+>-k     Causes  pppoe to terminate an existing session by sending a PADT
+>      frame, and then exit.  You must use the -e option in conjunction
+>       with  this  option  to specify the session to kill.  This may be
+>       useful for killing sessions when a buggy peer does  not  realize
+>       the session has ended
 
 But you need to get MAC adresses and session ID (help to logs or tcpdump) then use them adequately with pppoe command :
 
 pppoesk does this in an automatic way :
 
-    * sniff traffic on ethernet interface connected to the DSL modem
-    * search for MAC addresses and session ID
-    * forge PPPoE PADT packet
-    * send the packet 
+   * sniff traffic on ethernet interface connected to the DSL modem
+   * search for MAC addresses and session ID
+   * forge PPPoE PADT packet
+   * send the packet 
 
 Results 
 =======
@@ -81,3 +94,5 @@ Notes
 Of course it's possible to achieve same result with a shell script, but it's a bit less easy
 
 I firstly wrote this program to enhance my knowledge in C and to learn libnet and libpcap libraries. 
+
+No longer having access to PPPoE equipement, I can't test pppoesk behavior anymore.
