@@ -1,0 +1,62 @@
+.\"     Copyright (C) 2012 Loic Pefferkorn <loic-pppoesk@loicp.eu>
+.\"
+.\"     This program is free software; you can redistribute it and/or modify
+.\"     it under the terms of the GNU General Public License as published by
+.\"     the Free Software Foundation; either version 2 of the License, or
+.\"     (at your option) any later version.
+.\"
+.\"     This program is distributed in the hope that it will be useful,
+.\"     but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\"     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\"     GNU General Public License for more details.
+.\"
+.\"     You should have received a copy of the GNU General Public License
+.\"     along with this program; if not, write to the Free Software
+.\"     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+.\"
+
+.TH "pppoesk" 1
+.SH NAME
+pppoesk \- terminate bogus PPPoE sessions
+.SH SYNOPSIS
+.B pppoesk
+-i ethernet interface [-s source MAC addr] [-p print only] [-v version]
+.SH DESCRIPTION
+pppoesk can terminate bogus PPPoE sessions. 
+.LP
+"bogus" means the session is seen closed by the client but not by the ISP, so you have to wait for a timeout before beeing able to reestablish a new session. 
+.LP
+To close immediately the session, pppoesk sniff for PPPoE session's informations (ID, MAC of client
+and ISP equipment), then forge a PPPoE "PADT" (terminate) packet with theses informations which is sent to the ISP equipment.
+
+.SH OPTIONS
+.TP
+.B \-i ethernet interface
+The ethernet interface used to gather PPPoE session's informations then to send the forged packet.
+.TP
+.B \-p print only
+Don't send the packet, only print PPPoE session's informations.
+.TP
+.B \-s fake source MAC address
+Fake the source MAC address used in the forged packet. If you can't run pppoesk from the equipment used to
+establish the PPPoE session (router, ...), simply specify the MAC address of the ethernet interface
+connected to the DSL modem on the equipment.
+.TP
+.B \-v print version
+Print pppoesk's version then exit.
+.SH SEE ALSO
+.BR pppoe (8)
+.SH BUGS
+?
+.SH NO WARRANTIES
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+.PP
+pppoesk Home Page: http://www.loicp.eu
+.SH AUTHOR
+.PP
+Loic Pefferkorn.  Use <loic-pppoesk@loicp.eu> to contact the developer.
+

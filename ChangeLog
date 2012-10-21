@@ -1,0 +1,16 @@
+21/10/2012: Loic Pefferkorn <loic-pppoesk@loicp.eu>
+    * Cleanup
+    * Upload to GitHub
+
+06/01/2007: Loic Pefferkorn <loic@frozenbox.com>
+    * v1.1
+    * Works on FreeBSD.
+
+14/11/2006: Loic Pefferkorn <loic@frozenbox.com>
+    * v1.0a
+    * Missing files in the archive (pppoesk.1, pppoe.h)
+      were fixed.
+
+06/11/2006: Loic Pefferkorn <loic@frozenbox.com>
+    * v1.0
+    * Initial release.

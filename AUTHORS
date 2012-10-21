@@ -1,0 +1,7 @@
+Loic Pefferkorn <loic-pppoesk@loicp.eu>
+
+With contributions from:
+
+* _alex (linuxfr.org):
+    -patch to check return value of several libpcap functions.
+
